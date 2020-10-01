@@ -1,6 +1,8 @@
 import os 
 import csv 
 
+
+new_csv_name = "db.csv"
 # create new row to add 
 def add():
     login_name = input("Enter the name of the login name: ")
@@ -12,6 +14,7 @@ def add():
     return new_row
 
 # work on this 
+
 # def check():
 #     choice_1 = input("1 : New Item. \t2 : Read Item: ")
 #     if  choice_1 == 1:
@@ -19,14 +22,15 @@ def add():
 
 # create new csv file 
 
-new_csv_name = input("Enter the new Database name: ")
-new_csv_name = new_csv_name + ".csv"
+# later when we will have multiple databases
+# new_csv_name = input("Enter the new Database name: ")
+# new_csv_name = new_csv_name + ".csv"
 
 
-# with open(new_csv_name, 'a') as newFile:
-#     newFileWriter = csv.writer(newFile)
-#     x = add() 
-#     newFileWriter.writerow(x)
+with open(new_csv_name, 'a') as newFile:
+    newFileWriter = csv.writer(newFile)
+    x = add() 
+    newFileWriter.writerow(x)
 
 with open(new_csv_name,'r') as newFile:
     newFileReader = csv.reader(newFile)
