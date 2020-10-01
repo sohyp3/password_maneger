@@ -21,7 +21,14 @@ def add():
 
 new_csv_name = input("Enter the new Database name: ")
 new_csv_name = new_csv_name + ".csv"
-with open (new_csv_name, 'w') as new_file:
-    writer = csv.writer(new_file)
-    x = add()
-    writer.writerows(x)
+
+
+# with open(new_csv_name, 'a') as newFile:
+#     newFileWriter = csv.writer(newFile)
+#     x = add() 
+#     newFileWriter.writerow(x)
+
+with open(new_csv_name,'r') as newFile:
+    newFileReader = csv.reader(newFile)
+    for row in newFileReader:
+        print (row)
