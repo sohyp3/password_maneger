@@ -4,21 +4,23 @@ import csv
 
 new_csv_name = "db.csv"
 # create new row to add 
-def add():
-    login_name = input("Enter the name of the login name: ")
-    username = input("Enter the username: ")
-    email = input("Enter the email: ")
-    passowrd = input("Enter the passowrd: ")
-    notes = input("Any Additional notes?: ")
-    new_row = [[login_name, username, email, passowrd, notes]]
-    return new_row
+class operations():
+    def __init__(self):
+        self.choice = int(input("1 : New Item. \t2 : Read Item: "))
+        if self.choice == 1:
+            self.add()
+        else: 
+            print("broken")
 
-# work on this 
+    def add(self):
+        self.login_name = input("Enter the name of the login name: ")
+        self.username = input("Enter the username: ")
+        self.email = input("Enter the email: ")
+        self.passowrd = input("Enter the passowrd: ")
+        self.notes = input("Any Additional notes?: ")
+        self.new_row = [[login_name, username, email, passowrd, notes]]
+        return self.new_row
 
-# def check():
-#     choice_1 = input("1 : New Item. \t2 : Read Item: ")
-#     if  choice_1 == 1:
-#         return add()
 
 # create new csv file 
 
@@ -29,7 +31,7 @@ def add():
 
 with open(new_csv_name, 'a') as newFile:
     newFileWriter = csv.writer(newFile)
-    x = add() 
+    x = operations() 
     newFileWriter.writerow(x)
 
 with open(new_csv_name,'r') as newFile:
