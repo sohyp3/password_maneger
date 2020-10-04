@@ -18,16 +18,16 @@ class operations():
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
-        self.new_row = [login_name, username, email, passowrd, notes]
-        return self.new_row
+        self.new_row = [self.login_name, self.username, self.email, self.passowrd, self.notes]
+
+        with open(new_csv_name, 'a') as newFile:
+            newFileWriter = csv.writer(newFile)
+            newFileWriter.writerow(self.new_row)
 
 
-test_list = ["reddit", "suhib", "me@gmail.com", "123456",""]
+operations()
 
-with open(new_csv_name, 'a') as newFile:
-    newFileWriter = csv.writer(newFile)
-    # x = operations() 
-    newFileWriter.writerow(test_list)
+
 
 with open(new_csv_name,'r') as newFile:
     newFileReader = csv.reader(newFile)
