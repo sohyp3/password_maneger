@@ -38,7 +38,7 @@ class operations():
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
-        self.new_row = [[login_name, username, email, passowrd, notes]]
+        self.new_row = [login_name, username, email, passowrd, notes]
         return self.new_row
     def remove(self,selected):
         #idk how to but remove the seleceted
@@ -53,6 +53,12 @@ class operations():
     def search(self,keyword):
         pass 
         # check for it too 
+    
+    def showall(self):
+        with open('user.csv','r') as userFile:
+            userFileReader = csv.reader(userFile)
+            for row in userFileReader:
+                print (row)
 
 check_db = os.path.isfile(new_csv_name)
 if check_db:
