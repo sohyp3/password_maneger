@@ -6,11 +6,13 @@ new_csv_name = "db.csv"
 # create new row to add 
 class operations():
     def __init__(self):
-        self.choice = int(input("1 : New Item. \t2 : Read Item: "))
+        self.choice = int(input("1 : New Item. \t2 : Search for Item: "))
         if self.choice == 1:
             self.add()
-        else: 
-            print("broken")
+        elif self.choice == 2: 
+            self.search()
+        else:
+            print("BRoKEn!")
 
     def add(self):
         self.login_name = input("Enter the name of the login name: ")
@@ -24,12 +26,26 @@ class operations():
             newFileWriter = csv.writer(newFile)
             newFileWriter.writerow(self.new_row)
 
+    def remove(self):
+        pass 
+
+    def search(self):
+        self.search_for = input("Tell me What are you looking for? ")
+        with open (new_csv_name,'r') as newFile:
+            newFileReader = csv.reader(newFile)
+
+            for word in newFileReader:
+                if self.search_for in word:
+                    print(word)
+
+
+
 
 operations()
 
 
 
-with open(new_csv_name,'r') as newFile:
-    newFileReader = csv.reader(newFile)
-    for row in newFileReader:
-        print (row)
+# with open(new_csv_name,'r') as newFile:
+#     newFileReader = csv.reader(newFile)
+#     for row in newFileReader:
+#         print (row)
