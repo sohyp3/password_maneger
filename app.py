@@ -22,11 +22,6 @@ class operations():
         return self.new_row
 
 
-# create new csv file 
-
-# later when we will have multiple databases
-# new_csv_name = input("Enter the new Database name: ")
-# new_csv_name = new_csv_name + ".csv"
 test_list = ["reddit", "suhib", "me@gmail.com", "123456",""]
 
 with open(new_csv_name, 'a') as newFile:
