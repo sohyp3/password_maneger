@@ -20,7 +20,8 @@ while not_equal_0 !=0:
         not_equal_0 = 0
         print("\ntoo many wrong attempts GTFO :3\n")
         sys.exit()
-        
+
+# ==========================================================================================         
 
 new_csv_name = "db.csv"
 
@@ -32,14 +33,19 @@ class operations():
         else: 
             print("broken")
 
-    def add(self):
+        def add(self):
         self.login_name = input("Enter the name of the login name: ")
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
-        self.new_row = [login_name, username, email, passowrd, notes]
-        return self.new_row
+        self.new_row = [self.login_name, self.username, self.email, self.passowrd, self.notes]
+
+        with open(new_csv_name, 'a') as newFile:
+            newFileWriter = csv.writer(newFile)
+            newFileWriter.writerow(self.new_row)
+
+
     def remove(self,selected):
         #idk how to but remove the seleceted
         pass
@@ -60,6 +66,8 @@ class operations():
             for row in userFileReader:
                 print (row)
 
+
+# ==========================================================================================
 check_db = os.path.isfile(new_csv_name)
 if check_db:
     print("found welcome")
