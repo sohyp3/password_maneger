@@ -27,7 +27,8 @@ class operations():
             newFileWriter.writerow(self.new_row)
 
     def remove(self):
-        pass 
+        self.remove_item = input("Please Enter the item you want to remove: ")
+
 
     def search(self):
         self.search_for = input("Tell me What are you looking for? ")
@@ -37,6 +38,10 @@ class operations():
             for word in newFileReader:
                 if self.search_for in word:
                     print(word)
+                else :
+                    for x in test_hey:
+                        if "suh" in x:
+                            print("Ye")
 
 
 
