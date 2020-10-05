@@ -28,7 +28,7 @@ class operations():
 
     def remove(self):
         self.remove_item = input("Please Enter the item you want to remove: ")
-
+        
 
     def search(self):
         self.search_for = input("Tell me What are you looking for? ")
@@ -39,10 +39,9 @@ class operations():
                 if self.search_for in word:
                     print(word)
                 else :
-                    for x in test_hey:
-                        if "suh" in x:
-                            print("Ye")
-
+                    for specific_search in word:
+                        if self.search_for in specific_search:
+                            print(word)
 
 
 
