@@ -4,7 +4,7 @@ import sys
 
 
 # Ask the password 
-#
+
 master_password = "pineapple"
 not_equal_0 = 1
 sec_counter = 0
@@ -27,7 +27,7 @@ new_csv_name = "db.csv"
 
 class operations():
     def __init__(self):
-        self.choice = int(input("1 : New Item. \t2 : Read Item: "))
+        self.choice = int(input("1 : New Item. \t2 : Search For Item. \t3 : Edit an Item. \t 4 : Remove an Item. \n: "))
         if self.choice == 1:
             self.add()
         else: 
@@ -35,53 +35,27 @@ class operations():
 
 
     def add(self):
-        with open (new_csv_name , "r") as newFile:
-            readie = csv.reader(newFile)
-            self.check_login = input("Enter the name of the login name: ")
-            for word in readie:
-                if self.check_login == word[0]:
-                    print("Already Used.")
-                    self.test = True
-                    
-            while self.test == True:
-                print("hai")
+
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
         self.new_row = [self.login_name, self.username, self.email, self.passowrd, self.notes]
 
-        with open(new_csv_name, 'a') as newFile:
-            newFileWriter = csv.writer(newFile)
-            newFileWriter.writerow(self.new_row)
-
 
     def remove(self,selected):
-        #idk how to but remove the seleceted
         pass
+
     def edit(self,seleceted):
         are_you_sure = input("Are you Sure? (Y/n) ").lower
         if are_you_sure == "y":
-            #do it somehow 
             print("kk dude do it if u dare")
+            
         else :
             print("ok bye")
     def search(self,keyword):
         pass 
-        # check for it too 
     
     def showall(self):
-        with open('user.csv','r') as userFile:
-            userFileReader = csv.reader(userFile)
-            for row in userFileReader:
-                print (row)
+        pass
 
-
-# ==========================================================================================
-check_db = os.path.isfile(new_csv_name)
-if check_db:
-    print("found welcome")
-else: 
-    with open(new_csv_name, 'w') as newFile:
-        newFileWriter = csv.writer(newFile)    
-    print("Just Created one!")
