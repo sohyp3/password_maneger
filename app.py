@@ -19,34 +19,7 @@ class operations():
             print("BRoKEn!")
 
     def add(self):
-
-        with open (new_csv_name , "r") as newFile:
-            readie = csv.reader(newFile)
-            self.test = True
-            
-            while self.test == True:
-                #self.login_name = input("Enter the Login Name:")
-                
-                
-                
-                
-
-                self.check_login = input("Enter the login name: ")
-                for word in readie:
-                    self.fuck[self.i] = word[0]
-                    self.i+=1
-
-                    
-                print(self.fuck)
-
-                # if self.check_login in self.fuck:
-                #     print("Already Used.")
-                #     self.test = True
-                #     break
-                # else : 
-                #     print(self.check_login)
-                #     self.test = False
-        
+        self.login_name = input("Enter the Login Name:")
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
@@ -115,10 +88,7 @@ class operations():
 
 
 
-                    
-
-
-
+            
 
 
 
