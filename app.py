@@ -33,7 +33,7 @@ class operations():
         else: 
             print("broken")
 
-        def add(self):
+    def add(self):
         self.login_name = input("Enter the name of the login name: ")
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
