@@ -1,3 +1,9 @@
+# First Started to work with .csv as a database
+# But seems it was really really bad Choice so i have to abandon it 
+# I know its not clean and it can much much cleaner but there is no need since i abandoned it anyways 
+# (This is not my final code i may return to this later) check for other branch for the new one 
+# Have a Great day 
+
 import os 
 import csv 
 import sys
@@ -103,18 +109,7 @@ class operations():
                 for word in readie:
                     writie.writerow(word)
                 
-
-
-
-
-            
-
-
-
-
-
 operations()
-
 
 
 # with open(new_csv_name,'r') as newFile:
