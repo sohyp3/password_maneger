@@ -6,13 +6,15 @@ new_csv_name = "db.csv"
 # create new row to add 
 class operations():
     def __init__(self):
-        self.choice = int(input("1 : New Item. \t2 : Search for Item \t3 : for edit  "))
+        self.choice = int(input("1 : New Item. \t2 : Search for Item \t3 : for edit  \t4 : for remove \n: "))
         if self.choice == 1:
             self.add()
         elif self.choice == 2: 
             self.search()
         elif self.choice ==3:
             self.edit()
+        elif self.choice == 4: 
+            self.remove()
         else:
             print("BRoKEn!")
 
