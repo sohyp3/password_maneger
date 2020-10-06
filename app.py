@@ -33,8 +33,18 @@ class operations():
         else: 
             print("broken")
 
+
     def add(self):
-        self.login_name = input("Enter the name of the login name: ")
+        with open (new_csv_name , "r") as newFile:
+            readie = csv.reader(newFile)
+            self.check_login = input("Enter the name of the login name: ")
+            for word in readie:
+                if self.check_login == word[0]:
+                    print("Already Used.")
+                    self.test = True
+                    
+            while self.test == True:
+                print("hai")
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
