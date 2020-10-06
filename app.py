@@ -1,5 +1,24 @@
 import os 
 import csv 
+import sys
+
+
+
+master_password = "pineapple"
+not_equal_0 = 1
+sec_counter = 0
+while not_equal_0 !=0:
+    entery_for_password = input("Please Enter the master Password: ")
+    if entery_for_password != master_password:
+        sec_counter += 1
+        print("Wrong Try again")
+    else:
+        print("Welcome")
+        not_equal_0 = 0
+    if sec_counter == 3 :
+        not_equal_0 = 0
+        print("\ntoo many wrong attempts GTFO :3\n")
+        sys.exit()
 
 
 new_csv_name = "db.csv"
