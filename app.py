@@ -1,5 +1,4 @@
 import os 
-import csv 
 import sys
 
 
@@ -41,7 +40,7 @@ class operations():
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
         self.new_row = [self.login_name, self.username, self.email, self.passowrd, self.notes]
-
+        return self.new_row
 
     def remove(self,selected):
         pass
@@ -50,7 +49,7 @@ class operations():
         are_you_sure = input("Are you Sure? (Y/n) ").lower
         if are_you_sure == "y":
             print("kk dude do it if u dare")
-            
+
         else :
             print("ok bye")
     def search(self,keyword):
