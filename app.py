@@ -1,6 +1,6 @@
 import os 
 import sys
-
+import sqlite3
 
 # Ask the password 
 
@@ -22,7 +22,11 @@ while not_equal_0 !=0:
 
 # ==========================================================================================         
 
-new_csv_name = "db.csv"
+new_csv_name = "passwords.db"
+
+
+
+
 
 class operations():
     def __init__(self):
