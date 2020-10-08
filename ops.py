@@ -1,15 +1,18 @@
 import sys
 import os
 import sqlite3
+import random 
 
 
 database = "pswd.db"
 
 
 class functions():
-    def __init__(self):
+    def __init__(self,lenghth):
         self.passowrd_check()
         self.file_check()
+        #self.password_generate(lenghth)
+
 
     def passowrd_check(self):
         master_password = "pineapple"
@@ -35,6 +38,12 @@ class functions():
             with (open(database,"w")):
                 print("Database Created!")
 
+    def password_generate(self,lenghth):
+        self.leng = lenghth
+        letters = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+|"
+        result_str = ''.join((random.choice(letters) for i in range(self.leng)))
+        return result_str
+
 
 class operations():
     def __init__(self):
@@ -59,3 +68,6 @@ class operations():
 
     def showall(self):
         pass
+
+
+
