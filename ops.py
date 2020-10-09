@@ -51,11 +51,12 @@ class operations():
 
 
     def add (self):
+        self.login = input("Ente the login name: ")
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
-        return [self.username, self.email,self.passowrd, self.notes]
+        return [self.login ,self.username, self.email,self.passowrd, self.notes]
 
     def remove(self,id):
         pass 
