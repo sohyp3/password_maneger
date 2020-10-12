@@ -11,10 +11,12 @@ c = conn.cursor()
 
 
 class functions():
-    def __init__(self,lenghth):
+    def __init__(self):
         # self.passowrd_check()
-        self.file_check()
+        # self.file_check()
         self.table_check()
+
+        # lenghth = int(input("Please Enter the Len of the password : "))
         #self.password_generate(lenghth)
 
     def table_check(self):
@@ -53,13 +55,15 @@ class functions():
                 not_equal_0 = 0
                 print("\ntoo many wrong attempts GTFO :3\n")
                 sys.exit()    
+    
+    # There is no need since the sqlite creates one already if its not there 
+    # def file_check(self):
+    #     if os.path.isfile(database):
+    #         pass 
+    #     else : 
+    #         with (open(database,"w")):
+    #             print("Database Created!")
 
-    def file_check(self):
-        if os.path.isfile(database):
-            pass 
-        else : 
-            with (open(database,"w")):
-                print("Database Created!")
 
     def password_generate(self,lenghth):
         self.leng = lenghth
@@ -73,13 +77,23 @@ class operations():
         print("Hai")
 
 
-    def add (self):
+    def info_get (self):
         self.login = input("Ente the login name: ")
         self.username = input("Enter the username: ")
         self.email = input("Enter the email: ")
         self.passowrd = input("Enter the passowrd: ")
         self.notes = input("Any Additional notes?: ")
         return [self.login ,self.username, self.email,self.passowrd, self.notes]
+
+
+
+    def add(self):
+        insert = self.info_get()
+        with conn:
+            c.execute("INSERT INTO passwords() VALUES (:login, :user, :mail , :pswd , :notes)", {'login': insert[0], 'user': insert[1], 'mail': insert[2] , 'pswd' :insert[3], 'notes':insert[4]})        
+
+
+
 
     def remove(self,id):
         pass 
