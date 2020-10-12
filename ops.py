@@ -1,5 +1,4 @@
 import sys
-import os
 import sqlite3
 import random 
 
@@ -18,6 +17,7 @@ class functions():
         self.table_check()
         operations().showall()
         operations().search()
+        
         # lenghth = int(input("Please Enter the Len of the password : "))
         #self.password_generate(lenghth)
 
@@ -58,15 +58,6 @@ class functions():
                 print("\ntoo many wrong attempts GTFO :3\n")
                 sys.exit()    
     
-    # There is no need since the sqlite creates one already if its not there 
-    # def file_check(self):
-    #     if os.path.isfile(database):
-    #         pass 
-    #     else : 
-    #         with (open(database,"w")):
-    #             print("Database Created!")
-
-
     def password_generate(self,lenghth):
         self.leng = lenghth
         letters = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+|"
