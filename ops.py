@@ -3,16 +3,39 @@ import os
 import sqlite3
 import random 
 
+database = "passwords.db"
+conn = sqlite3.connect(database)
 
-database = "pswd.db"
+c = conn.cursor()
+
 
 
 class functions():
     def __init__(self,lenghth):
-        self.passowrd_check()
+        # self.passowrd_check()
         self.file_check()
+        self.table_check()
         #self.password_generate(lenghth)
 
+    def table_check(self):
+        with conn:
+            c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='passwords'; ''')
+            if c.fetchone()[0]==1 : {
+                print('Table exists.')
+            }
+            else:
+                c.execute("""CREATE TABLE passwords (
+                            id INTEGER PRIMARY KEY,
+                            login text,
+                            email text,
+                            username text,
+                            pswd text,
+                            notes text
+                            );""") 
+                print("Table has been created.")
+
+
+        
 
     def passowrd_check(self):
         master_password = "pineapple"
