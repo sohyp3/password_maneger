@@ -3,9 +3,10 @@ import os
 import sqlite3
 import random 
 
+
+#SQLite stuff
 database = "passwords.db"
 conn = sqlite3.connect(database)
-
 c = conn.cursor()
 
 
@@ -15,7 +16,8 @@ class functions():
         # self.passowrd_check()
         # self.file_check()
         self.table_check()
-        operations().add()
+        operations().showall()
+        operations().search()
         # lenghth = int(input("Please Enter the Len of the password : "))
         #self.password_generate(lenghth)
 
@@ -95,18 +97,23 @@ class operations():
             print(c.fetchall())
 
 
-
-    def remove(self,id):
-        pass 
-
     def update(self,update_selection,update_item):
         pass 
 
     def remove(self,id):
         pass 
+    
+    def search(self):
+        search_for = input("What Are you looking for: ")
+        with conn:
+            c.execute("SELECT * FROM passwords WHERE login = :srch", {'srch' : search_for})
+            print(c.fetchall())
 
     def showall(self):
-        pass
-
+        with conn:
+            c.execute("SELECT * FROM passwords")
+            items = c.fetchall()
+            for item in items:
+                print(item)
 
 
