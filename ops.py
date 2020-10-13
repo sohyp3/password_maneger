@@ -9,7 +9,6 @@ conn = sqlite3.connect(database)
 c = conn.cursor()
 
 
-
 class functions():
     def __init__(self):
         # self.passowrd_check()
@@ -17,7 +16,7 @@ class functions():
         self.table_check()
         operations().showall()
         operations().search()
-        
+
         # lenghth = int(input("Please Enter the Len of the password : "))
         #self.password_generate(lenghth)
 
@@ -37,9 +36,6 @@ class functions():
                             notes text
                             );""") 
                 print("Table has been created.")
-
-
-        
 
     def passowrd_check(self):
         master_password = "pineapple"
@@ -97,8 +93,14 @@ class operations():
     def search(self):
         search_for = input("What Are you looking for: ")
         with conn:
-            c.execute("SELECT * FROM passwords WHERE login = :srch", {'srch' : search_for})
-            print(c.fetchall())
+            c.execute("SELECT * FROM passwords")
+            items = c.fetchall()
+            for item in items:
+                for itm in item:
+                    if search_for in str(itm):
+                        print(item)
+
+
 
     def showall(self):
         with conn:
@@ -106,5 +108,3 @@ class operations():
             items = c.fetchall()
             for item in items:
                 print(item)
-
-
