@@ -15,8 +15,8 @@ class functions():
         # self.file_check()
         self.table_check()
         operations().showall()
-        operations().search()
-
+        
+        operations().add()
         # lenghth = int(input("Please Enter the Len of the password : "))
         #self.password_generate(lenghth)
 
@@ -87,9 +87,21 @@ class operations():
     def update(self,update_selection,update_item):
         pass 
 
-    def remove(self,id):
-        pass 
-    
+    def remove(self):
+        search_for = input("What do you want to remove? (Enter the login name) ")
+        with conn:
+            c.execute("SELECT * FROM passwords WHERE login = :srch", {'srch' : search_for})
+            print(c.fetchall())
+            delete_selection = int(input("Select The ID of the login you want to delete: "))
+            if delete_selection == 0:
+                print("Exiting..")
+            else:
+                delete_sure = input("are you sure?? (Y/n) ").lower()
+                if delete_sure == "y":
+                    c.execute("DELETE FROM passwords WHERE id = :delete",{"delete" : delete_selection})
+                    print("Deleted! ")
+
+
     def search(self):
         search_for = input("What Are you looking for: ")
         with conn:
