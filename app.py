@@ -1,28 +1,64 @@
-import os 
 import sys
 import sqlite3
+import random
 
-# Ask the password 
 
-master_password = "pineapple"
-not_equal_0 = 1
-sec_counter = 0
-while not_equal_0 !=0:
-    entery_for_password = input("Please Enter the master Password: ")
-    if entery_for_password != master_password:
-        sec_counter += 1
-        print("Wrong Try again")
-    else:
-        print("Welcome")
-        not_equal_0 = 0
-    if sec_counter == 3 :
-        not_equal_0 = 0
-        print("\ntoo many wrong attempts GTFO :3\n")
-        sys.exit()
+master_password = 'banana'
 
-# ==========================================================================================         
+# SQLite Connection()
+database = 'passwords.db'
+conn = sqlite3.connect(database)
+c = conn.cursor()
 
-new_csv_name = "passwords.db"
+class home():
+    def __init__(self):
+        self.password_check()
+        self.table_check()
+        
+        operations()
+
+    def table_check(self):
+        with conn:
+            c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='passwords'; ''')
+
+            if c.fetchone()[0] ==1:
+                print('Table Exists')
+
+            else:
+                c.execute(""" 
+                    CREATE TABLE passwords(
+                        id INTEGER PRIMARY KEY,
+                        login text,
+                        email text,
+                        username text,
+                        pswd text,
+                        notes text,
+                        );
+                """)
+                print('Table Exists')
+
+    def password_check(self):
+        tries = 0
+
+        while True:
+            password_input = input("Enter the master password: ")
+            if password_input != master_password:
+                tries += 1
+                print('Wrong, Try again')
+            else:
+                print('Welcome')
+                break
+            
+            if tries == 3:
+                print('Too many wrong attempt, bye!')
+                sys.exit()
+
+
+
+def generate_password(length):
+    letters = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+|"
+
+    return "".join(random.choice(letters) for i in range(length))
 
 
 
@@ -30,36 +66,98 @@ new_csv_name = "passwords.db"
 
 class operations():
     def __init__(self):
-        self.choice = int(input("1 : New Item. \t2 : Search For Item. \t3 : Edit an Item. \t 4 : Remove an Item. \n: "))
-        if self.choice == 1:
+        self.show_all()
+        choice = input('(A)dd \n(S)earch\n(U)pdate\n(R)emove\nChoose: ')
+
+        if choice.lower() == 's':
+            self.search()
+        elif choice.lower() == 'a':
             self.add()
-        else: 
-            print("broken")
+        elif choice.lower() == 'u':
+            self.update()
+        elif choice.lower() == 'r':
+            self.remove()
 
 
+    def show_all(self):
+        with conn:
+            c.execute('SELECT * FROM passwords')
+            items = c.fetchall()
+            for item in items:
+                print(item)
+
+
+    def search(self):
+        search_for = input('Enter the login to search for remove: ')
+        with conn:
+            c.execute('SELECT * FROM passwords WHERE login LIKE ?',(f'%{search_for}%',))
+            print(c.fetchall())
+            
+    def remove(self):
+        search_for = input('What are you looking for: ')
+        with conn:
+            c.execute('SELECT * FROM passwords WHERE login LIKE ?',(f'%{search_for}%',))
+            print(c.fetchall())
+
+            self.del_sel = int(input("Select the id for the item you want to remove: (0 to exit)  "))
+            if self.del_sel == 0:
+                print('exiting..')
+            else:
+                c.execute("SELECT *  FROM passwords WHERE id = ?",(self.del_sel,))
+                print(c.fetchall())
+                self.del_sure = input('Are you sure? (y/N): ')
+                if self.del_sure.lower() == 'y':
+                    c.execute("DELETE FROM passwords WHERE id = ?",(self.del_sel,))
+                    print('deleted!')
+                    print('======\n=====\n=====\n=====\n====\n')
+                    self.show_all()
+                else:
+                    print('aborted!')
+
+
+
+
+    def update(self):
+        search_for = input('Enter the login to search for update: ')
+        with conn:
+            c.execute('SELECT * FROM passwords WHERE login LIKE ?', (f'%{search_for}%',))
+            print(c.fetchall())
+
+            self.upd_sel= int(input("Select the id for the item you want to update: (0 to exit) "))
+            if self.upd_sel== 0:
+                print('Exiting...')
+            else:
+                self.field_to_update = input("What do you want to update? (login/email/username/password/notes): ").lower()
+
+                self.new_value = input(f"Enter new {self.field_to_update}: ")
+
+                c.execute(f"UPDATE passwords SET {self.field_to_update} = ? WHERE id = ?", (self.new_value, self.upd_sel))
+                print('Updated successfully!')
+
+                print('======\n=====\n=====\n=====\n====\n')
+                self.show_all()
 
     def add(self):
+        self.login = input("login name: ")
+        self.email = input("email or phone number: ")
+        self.username = input("username: ")
 
-        self.username = input("Enter the username: ")
-        self.email = input("Enter the email: ")
-        self.passowrd = input("Enter the passowrd: ")
-        self.notes = input("Any Additional notes?: ")
-        self.new_row = [self.login_name, self.username, self.email, self.passowrd, self.notes]
-        return self.new_row
+        self.gen_pass = input("do you want to generate a password? (Y/n): ")
+        if self.gen_pass.lower() !='n' :
+            length = int(input('how long you want it to be? '))
+            self.password = generate_password(length)
+            print(f"selected password : {self.password}")
+        else:
+            self.password= input("passowrd: ")
+        self.notes = input("notes: ")
 
-    def remove(self,selected):
-        pass
 
-    def edit(self,seleceted):
-        are_you_sure = input("Are you Sure? (Y/n) ").lower
-        if are_you_sure == "y":
-            print("kk dude do it if u dare")
+        with conn:
+            c.execute("INSERT INTO passwords(login, email, username, pswd, notes) VALUES (? , ? , ? , ? ,?)",(self.login,self.email,self.username,self.password,self.notes))
+            self.show_all()
 
-        else :
-            print("ok bye")
-    def search(self,keyword):
-        pass 
-    
-    def showall(self):
-        pass
 
+
+
+
+home()
